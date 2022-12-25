@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", true);
 
 function dbConnect() {
 	const { DB_URI_CLOUD, DB_URI_LOCAL, NODE_ENV } = process.env;
 	const dbUrl = NODE_ENV === "production" ? DB_URI_CLOUD : DB_URI_LOCAL;
 
 	mongoose
-		.connect(dbUrl, { useUnifiedTopology: true, useNewUrlParser: true })
+		.connect(dbUrl, {
+			useUnifiedTopology: true,
+			useNewUrlParser: true,
+		})
 		.then(() => {
 			console.log("Database connected");
 		})
